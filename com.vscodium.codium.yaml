@@ -41,15 +41,11 @@ cleanup:
   - /share/gtk-doc
   - '*.la'
 modules:
+  - shared-modules/libsecret/libsecret.json
   - name: codium
     buildsystem: simple
     build-commands:
       - install -Dm644 codium.svg /app/share/icons/hicolor/scalable/apps/com.vscodium.codium.svg
-      - |
-        for size in 16 32 48 64 128 256 512; do
-          rsvg-convert --width ${size} --keep-aspect-ratio --format png --output codium_${size}.png codium.svg || exit 1
-          install -Dm644 codium_${size}.png /app/share/icons/hicolor/${size}x${size}/apps/com.vscodium.codium.png || exit 1
-        done
       - install -Dm644 com.vscodium.codium.metainfo.xml -t /app/share/metainfo
       - install -Dm644 npmrc -t /app/etc
       - cp /usr/bin/ar /app/bin
